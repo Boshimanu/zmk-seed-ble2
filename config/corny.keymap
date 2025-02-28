@@ -5,6 +5,8 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/pointing.h>
 
 &mmv {
     acceleration-exponent = <2>;
@@ -348,10 +350,10 @@
 
         Move {
             bindings = <
-&kp TAB    &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT                      &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp BSPC
-&kp LCTRL  &trans    &trans  &trans    &trans    &trans                         &kp MINUS  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
-&kp LSHFT  &trans    &trans  &trans    &trans    &trans     &none  &bootloader  &kp UNDER  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
-                             &kp LGUI  &trans    &kp SPACE                      &kp RET    &trans     &kp LALT
+&trans       &trans  &msc SCRL_DOWN  &mmv MOVE_UP    &msc SCRL_DOWN   &trans                         &kp DEL       &kp LA(LEFT)  &kp UP    &kp LA(RIGHT)  &trans    &kp PAGE_UP
+&trans       &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans                         &kp LG(UP)    &kp LEFT      &kp DOWN  &kp RIGHT      &kp INS   &kp PAGE_DOWN
+&cat_sh_hml  &trans  &msc SCRL_LEFT  &trans          &msc SCRL_RIGHT  &trans     &none  &bootloader  &kp LG(DOWN)  &kp LG(LEFT)  &kp LBRC  &kp LG(RIGHT)  &kp HOME  &kp END
+                                     &trans          &mkp LCLK        &mkp RCLK                      &kp RET       &trans        &kp LALT
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
