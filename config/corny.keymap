@@ -125,9 +125,49 @@
     combos {
         compatible = "zmk,combos";
 
-        escape {
+        Escape {
             bindings = <&kp ESCAPE>;
             key-positions = <3 2>;
+            timeout-ms = <30>;
+            require-prior-idle-ms = <50>;
+            layers = <0 1 2>;
+        };
+
+        Cut {
+            bindings = <&kp LG(X)>;
+            key-positions = <25 26>;
+            timeout-ms = <30>;
+            require-prior-idle-ms = <50>;
+            layers = <0 1 2>;
+        };
+
+        Copy {
+            bindings = <&kp LG(C)>;
+            key-positions = <26 27>;
+            timeout-ms = <30>;
+            require-prior-idle-ms = <50>;
+            layers = <0 1 2>;
+        };
+
+        Paste {
+            bindings = <&kp LG(V)>;
+            key-positions = <27 28>;
+            timeout-ms = <30>;
+            require-prior-idle-ms = <50>;
+            layers = <0 1 2>;
+        };
+
+        Del {
+            bindings = <&kp DELETE>;
+            key-positions = <3 4>;
+            timeout-ms = <30>;
+            require-prior-idle-ms = <50>;
+            layers = <0 1 2>;
+        };
+
+        toLayerZero {
+            bindings = <&to 0>;
+            key-positions = <24 25>;
             timeout-ms = <30>;
             require-prior-idle-ms = <50>;
             layers = <0 1 2>;
@@ -277,9 +317,9 @@
 
         Colemak {
             bindings = <
-&ht LS(TAB) TAB             &kp Q            &kp W           &kp F                 &kp P           &kp G                               &kp J           &kp L           &kp U                  &kp Y                &kp SEMI         &kp BSLH
-&ht_bck LA(BSPC) BACKSPACE  &lhmrow LCTRL A  &lhmrow LALT R  &lhmrow LEFT_SHIFT S  &lhmrow LCMD T  &kp D                               &kp H           &rhmrow RCMD N  &rhmrow RIGHT_SHIFT E  &rhmrow RIGHT_ALT I  &rhmrow RCTRL O  &kp SQT
-&cat_nav_sh                 &kp Z            &kp X           &kp C                 &kp V           &kp B           &trans  &kp C_MUTE  &kp K           &kp M           &kp COMMA              &kp DOT              &kp FSLH         &kp RSHFT
+&ht LS(TAB) TAB             &kp Q            &kp W           &kp F                 &kp P           &kp G                               &kp J           &kp L           &kp U                  &kp Y                    &kp SEMI         &kp BSLH
+&ht_bck LA(BSPC) BACKSPACE  &lhmrow LCTRL A  &lhmrow LALT R  &lhmrow LEFT_SHIFT S  &lhmrow LCMD T  &kp D                               &kp H           &rhmrow RCMD N  &rhmrow RIGHT_SHIFT E  &rhmrow RIGHT_ALT I      &rhmrow RCTRL O  &kp SQT
+&cat_nav_sh                 &kp Z            &kp X           &kp C                 &kp V           &kp B           &trans  &kp C_MUTE  &kp K           &kp M           &ht LESS_THAN COMMA    &ht GREATER_THAN PERIOD  &kp FSLH         &kp RSHFT
                                                              &lt 4 LG(SPACE)       &lt 1 SPACE     &ht LCMD ENTER                      &ht RCMD ENTER  &lt 2 SPACE     &mo 3
             >;
 
@@ -289,13 +329,16 @@
 
         Numbers {
             bindings = <
-&kp TAB     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5                            &kp N6    &kp N7    &kp N8    &kp N9     &kp N0   &kp BSPC
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                      &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT  &trans   &kp F12
-&kp LSHFT   &kp F1        &kp F2        &kp F3        &kp F4        &kp F5        &bootloader  &none  &kp F6    &kp F7    &kp F8    &kp F9     &kp F10  &kp F11
-                                        &kp LGUI      &trans        &kp SPACE                         &kp RET   &trans    &kp LALT
+&trans      &kp LS(EXCL)                 &kp LS(AT)                     &kp LS(POUND)  &kp LS(DLLR)   &kp LS(PRCNT)                      &kp LS(CARET)   &kp LS(AMPS)          &kp LS(STAR)  &kp LS(LPAR)  &kp LS(RPAR)  &kp CAPSLOCK
+&bt BT_CLR  &kp N1                       &kp N2                         &kp N3         &kp N4         &kp N5                             &kp N6          &kp N7                &kp N8        &kp N9        &kp N0        &kp EQUAL
+&mk_capt    &ht LEFT_BRACE LEFT_BRACKET  &ht RIGHT_BRACE RIGHT_BRACKET  &kp LC(LEFT)   &kp LC(RIGHT)  &dt_ameth      &bootloader  &none  &ht PLUS EQUAL  &ht UNDERSCORE MINUS  &trans        &trans        &trans        &ht LS(GRAVE) TILDE
+                                                                        &kp LS(LA(B))  &trans         &trans                             &trans          &trans                &trans
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings =
+                <&inc_dec_kp C_BRIGHTNESS_INC C_BRIGHTNESS_DEC>,
+                <&inc_dec_kp PG_UP PG_DN>;
+
             label = "Numbers";
         };
 
@@ -334,14 +377,26 @@
         };
 
         Bt_Sys {
+            label = "Bt-Sys";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans                  &trans  &trans  &trans
+&trans      &kp N1        &kp N2        &kp N3        &kp N4        &kp N5                            &kp N6    &kp N7    &kp N8    &kp N9     &kp N0   &kp BSPC
+&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                      &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT  &trans   &kp F12
+&kp LSHFT   &kp F1        &kp F2        &kp F3        &kp F4        &kp F5        &bootloader  &none  &kp F6    &kp F7    &kp F8    &kp F9     &kp F10  &kp F11
+                                        &kp LGUI      &trans        &kp SPACE                         &kp RET   &trans    &kp LALT
             >;
 
-            label = "Bt_Sys";
+            sensor-bindings =
+                <&inc_dec_kp C_VOL_UP C_VOL_DN>,
+                <&inc_dec_kp PG_UP PG_DN>;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        Bt-Sys {
+            if-layers = <3 4>;
+            then-layer = <5>;
         };
     };
 };
