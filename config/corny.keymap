@@ -7,6 +7,7 @@
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/rgb.h>
 
 &mmv {
     acceleration-exponent = <2>;
@@ -92,7 +93,7 @@
         it_e: it_e {
             compatible = "zmk,behavior-hold-tap";
             label = "IT_E";
-            bindings = <&kp>, <&kp>;
+            bindings = <&it_shift_egrav>, <&it_egrav>;
 
             #binding-cells = <2>;
             tapping-term-ms = <145>;
@@ -177,6 +178,22 @@
             timeout-ms = <30>;
             require-prior-idle-ms = <50>;
             layers = <0 1 2>;
+        };
+
+        cmd_shift_left {
+            bindings = <&kp LG(LSHIFT)>;
+            key-positions = <15 16>;
+            timeout-ms = <30>;
+            require-prior-idle-ms = <50>;
+            layers = <0>;
+        };
+
+        cmd_shift_right {
+            bindings = <&kp RG(LSHIFT)>;
+            key-positions = <20 19>;
+            timeout-ms = <30>;
+            require-prior-idle-ms = <50>;
+            layers = <0>;
         };
     };
 
@@ -335,10 +352,10 @@
 
         Numbers {
             bindings = <
-&trans      &kp LS(EXCL)                 &kp LS(AT)                     &kp LS(POUND)  &kp LS(DLLR)   &kp LS(PRCNT)                      &kp LS(CARET)   &kp LS(AMPS)          &kp LS(STAR)  &kp LS(LPAR)  &kp LS(RPAR)  &kp CAPSLOCK
-&bt BT_CLR  &kp N1                       &kp N2                         &kp N3         &kp N4         &kp N5                             &kp N6          &kp N7                &kp N8        &kp N9        &kp N0        &kp EQUAL
-&mk_capt    &ht LEFT_BRACE LEFT_BRACKET  &ht RIGHT_BRACE RIGHT_BRACKET  &kp LC(LEFT)   &kp LC(RIGHT)  &dt_ameth      &bootloader  &none  &ht PLUS EQUAL  &ht UNDERSCORE MINUS  &trans        &trans        &trans        &ht LS(GRAVE) TILDE
-                                                                        &kp LS(LA(B))  &trans         &trans                             &trans          &trans                &trans
+&trans         &kp LS(EXCL)                 &kp LS(AT)                     &kp LS(POUND)               &kp LS(DLLR)                 &kp LS(PRCNT)                &kp LS(CARET)   &kp LS(AMPS)          &kp LS(STAR)       &kp LS(LPAR)          &kp LS(RPAR)      &kp CAPSLOCK
+&kp BACKSPACE  &lhmrow LCTRL N1             &lhmrow LEFT_ALT N2            &lhmrow LEFT_SHIFT N3       &lhmrow LCMD N4              &kp N5                       &kp N6          &rhmrow RCMD N7       &rhmrow RSHIFT N8  &rhmrow RIGHT_ALT N9  &rhmrow RCTRL N0  &ht PLUS EQUAL
+&mk_capt       &ht LEFT_BRACE LEFT_BRACKET  &ht RIGHT_BRACE RIGHT_BRACKET  &ht LC(LA(LS(W))) LC(LEFT)  &ht LC(LA(LS(E))) LC(RIGHT)  &dt_ameth      &none  &none  &ht PLUS EQUAL  &ht UNDERSCORE MINUS  &trans             &trans                &trans            &ht GRAVE TILDE
+                                                                           &kp LS(LA(B))               &trans                       &trans                       &trans          &trans                &trans
             >;
 
             sensor-bindings =
@@ -351,8 +368,8 @@
         Move {
             bindings = <
 &trans       &trans  &msc SCRL_DOWN  &mmv MOVE_UP    &msc SCRL_DOWN   &trans                         &kp DEL       &kp LA(LEFT)  &kp UP    &kp LA(RIGHT)  &trans    &kp PAGE_UP
-&trans       &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans                         &kp LG(UP)    &kp LEFT      &kp DOWN  &kp RIGHT      &kp INS   &kp PAGE_DOWN
-&cat_sh_hml  &trans  &msc SCRL_LEFT  &trans          &msc SCRL_RIGHT  &trans     &none  &bootloader  &kp LG(DOWN)  &kp LG(LEFT)  &trans    &kp LG(RIGHT)  &kp HOME  &kp END
+&trans       &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &kp ENTER                      &kp LG(UP)    &kp LEFT      &kp DOWN  &kp RIGHT      &kp INS   &kp PAGE_DOWN
+&cat_sh_hml  &trans  &msc SCRL_LEFT  &trans          &msc SCRL_RIGHT  &kp SPACE  &none  &bootloader  &kp LG(DOWN)  &kp LG(LEFT)  &trans    &kp LG(RIGHT)  &kp HOME  &kp END
                                      &trans          &mkp LCLK        &mkp RCLK                      &trans        &trans        &trans
             >;
 
@@ -362,10 +379,10 @@
 
         Italian {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans                  &trans  &trans  &trans
+&kp C_PREV  &kp C_PP          &kp C_NEXT  &kp K_MUTE  &kp C_VOL_DN  &kp C_VOL_UP                 &trans      &trans      &it_u       &trans      &trans      &trans
+&trans      &it_a             &trans      &trans      &kp C_BRI_DN  &kp C_BRI_UP                 &trans      &trans      &it_e 0 0   &it_i       &it_o       &trans
+&trans      &kp LG(NUMBER_1)  &kp LG(N2)  &kp LG(N3)  &kp LG(N4)    &kp LG(N5)    &none  &trans  &kp LG(N6)  &kp LG(N7)  &kp LG(N8)  &kp LG(N9)  &kp LG(N0)  &trans
+                                          &trans      &trans        &trans                       &trans      &trans      &trans
             >;
 
             label = "Italian";
@@ -373,10 +390,10 @@
 
         Emoji {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans                  &trans  &trans  &trans
+&trans  &trans  &elove   &efp        &ehmmm       &trans                 &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &laugh  &esmile  &eok        &ethank      &esad                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans   &doublecmd  &doublectrl  &trans  &none  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                         &trans      &trans       &trans                 &trans  &trans  &trans
             >;
 
             label = "Emoji";
@@ -385,10 +402,10 @@
         Bt_Sys {
             label = "Bt-Sys";
             bindings = <
-&trans      &kp N1        &kp N2        &kp N3        &kp N4        &kp N5                            &kp N6    &kp N7    &kp N8    &kp N9     &kp N0   &kp BSPC
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                      &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT  &trans   &kp F12
-&kp LSHFT   &kp F1        &kp F2        &kp F3        &kp F4        &kp F5        &bootloader  &none  &kp F6    &kp F7    &kp F8    &kp F9     &kp F10  &kp F11
-                                        &kp LGUI      &trans        &kp SPACE                         &kp RET   &trans    &kp LALT
+&kp F1       &kp F2           &kp F3           &kp F4           &kp F5           &kp F6                         &kp F7           &kp F8           &kp F9           &kp F10          &kp F11          &kp F12
+&bt BT_CLR   &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3     &bt BT_SEL 4                   &trans           &kp LCMD         &kp LEFT_SHIFT   &kp LALT         &kp LCTRL        &rgb_ug RGB_TOG
+&bootloader  &rgb_ug RGB_EFR  &rgb_ug RGB_EFF  &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &rgb_ug RGB_SPD  &none  &none  &rgb_ug RGB_BRI  &rgb_ug RGB_SAD  &rgb_ug RGB_SAI  &rgb_ug RGB_HUD  &rgb_ug RGB_HUI  &bootloader
+                                               &trans           &trans           &sys_reset                     &sys_reset       &trans           &trans
             >;
 
             sensor-bindings =
